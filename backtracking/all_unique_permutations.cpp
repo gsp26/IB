@@ -30,3 +30,21 @@ vector<vector<int> > Solution::permute(vector<int> &A)
     return permuteUnique(A);
     
 }
+
+void solve(vector<int> num,int l , int r, vector<vector<int>>& res){
+        if(l==r){
+            res.push_back(num);
+            return;
+        }
+        for(int i = l;i <=r;i++){
+            if(i != l && num[i] == num[l])continue;
+            swap(num[i],num[l]);
+            solve(num,l+1,r,res);
+        }
+    }
+    vector<vector<int>> permuteUnique(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        vector<vector<int>> res;
+        solve(nums,0,nums.size()-1,res);
+        return res;
+    }
